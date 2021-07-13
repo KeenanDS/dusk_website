@@ -34,8 +34,7 @@ def create_story():
 @storys.route('/<int:story_id>')
 def story(story_id):
     story = Story.query.get_or_404(story_id)
-    return render_template('story.html',title=story.title,
-                            date=story.date,post=story)
+    return render_template('story.html',post=story)
 
 
 

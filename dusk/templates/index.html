@@ -10,10 +10,10 @@
         {% for post in story.items %}
         <div class="card">
             <div class="card-body">
-                <h2><a class="card-title" href="{{url_for('storys.story',story_id=story.id)}}">{{story.title}}</a> </h2>
-                <a href="{{url_for('users.user_post', username=post.author.username)}}">Written By: {{ story.author.username}}</a>
+		                <h2><a class="card-title" href="{{url_for('storys.story',story_id=post.id)}}">{{post.title}}</a> </h2>
+                <a href="{{url_for('users.user_posts', username=post.author.username)}}">Written By: {{ post.author.username}}</a>
                 <p>Published on: {{post.date.strftime('%Y-%m-%d')}}</p>
-                <a class='btn btn-primary'href="{{url_for('storys.story',story_id=story.id)}}">Read Story</a>
+                <a class='btn btn-primary'href="{{url_for('storys.story',story_id=post.id)}}">Read Story</a>
             </div>
 
         </div>
@@ -25,7 +25,7 @@
     <nav aria-label='Page Navigation example'>
         <ul class="pagination justify-content-center">
             
-            {% for page_num in storys.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+            {% for page_num in story.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
                 
                 {% if story.page == page_num %}
                 <li class='page-item disabled'>
