@@ -6,9 +6,15 @@ core = Blueprint('core',__name__)
 
 @core.route('/')
 def index():
+    return render_template('index.html')
+
+    
+
+@core.route('/dashboard')
+def dashboard():
     page = request.args.get('page',1,type=int)
     story = Story.query.order_by(Story.date.desc()).paginate(page=page,per_page=5)
-    return render_template('index.html',story=story)
+    return render_template('dashboard.html',story=story)
 
 
 @core.route('/info')

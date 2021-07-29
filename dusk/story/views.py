@@ -24,7 +24,7 @@ def create_story():
         db.session.add(story)
         db.session.commit()
         flash('Story Saved')
-        return redirect(url_for('core.index'))
+        return redirect(url_for('core.dashboard'))
 
     return render_template('create_story.html',form=form)
 
@@ -34,8 +34,7 @@ def create_story():
 @storys.route('/<int:story_id>')
 def story(story_id):
     story = Story.query.get_or_404(story_id)
-    return render_template('story.html',title=story.title,
-                            date=story.date,post=story)
+    return render_template('story.html',post=story)
 
 
 
@@ -48,7 +47,7 @@ def update(story_id):
     if story.author != current_user:
         abort(403)
 
-    form = StoryForm
+    form = StoryForm()
 
     if form.validate_on_submit():
 
@@ -77,4 +76,4 @@ def delete_story(story_id):
     
     db.session.delete(story)
     db.session.commit()
-    return redirect(url_for('core.index'))
+    return redirect(url_for('core.dashboard'))

@@ -21,7 +21,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Thanks for registration!')
-        return redirect(url_for('users.login'))
+        return redirect(url_for('users.account'))
 
     return render_template('register.html',form=form)
 
@@ -43,7 +43,7 @@ def login():
             next = request.args.get('next')
 
             if next == None or not next[0]=='/':
-                next = url_for('core.index')
+                next = url_for('core.dashboard')
             
             return redirect(next)
 
@@ -59,7 +59,7 @@ def logout():
 
 #Account
 @users.route("/account",methods=['GET','POST'])
-@login_required
+# @login_required
 def account():
     
     form = UpdateUserForm()
